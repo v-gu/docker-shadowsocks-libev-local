@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  ss-local_main:
+    container_name: ss-local_main
+    image: lisnaz/shadowsocks-libev-local:latest
+    networks:
+      default:
+        ipv4_address: 172.18.0.2
+    environment:
+      - SS_LOCAL_LISTEN_ADDR=<shadowsocks-libev local's listening address>
+      - SS_LOCAL_LISTEN_PORT=<shadowsocks-libev local's listening port>
+      - SS_LOCAL_TARGET_ADDR=<shadowsocks-libev server's address>
+      - SS_LOCAL_TARGET_PORT=<shadowsocks-libev server's port>
+      - SS_PASSWORD=password
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24
+          gateway: 172.18.0.1
