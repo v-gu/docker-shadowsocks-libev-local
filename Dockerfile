@@ -16,3 +16,9 @@ EXPOSE $SS_LOCAL_LISTEN_PORT/udp
 
 ADD entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
+
+# install dependencies
+ENV SS_DEP bash
+RUN set -ex \
+    && apk add --update --no-cache $SS_DEP \
+    && rm -rf /var/cache/apk/*
